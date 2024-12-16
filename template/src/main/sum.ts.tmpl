@@ -1,0 +1,17 @@
+/*
+ * Copyright (C) ${year} Klaus Reimer <k@ailis.de>
+ * See LICENSE.md for licensing information
+ */
+
+/** Arguments for the {@link sum} function. */
+export type SumArgs = [ number, number, ...number[] ];
+
+/**
+ * Adds all passed numbers and returns the sum.
+ *
+ * @param numbers - The numbers to add
+ * @returns The sum.
+ */
+export function sum(...numbers: SumArgs): number {
+    return numbers.reduce((sum, number) => sum + number);
+}
