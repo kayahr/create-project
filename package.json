@@ -20,7 +20,8 @@
     },
     "files": [
         "lib/main/",
-        "src/main/"
+        "src/main/",
+        "template"
     ],
     "bin": "lib/main/create-project.js",
     "scripts": {
