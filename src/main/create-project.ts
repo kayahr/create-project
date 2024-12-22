@@ -44,8 +44,8 @@ for (const filename of await glob("**/*.tmpl", { cwd: templateDir, nodir: true, 
 }
 
 const packageJSON = JSON.parse(await readFile(join(projectDir, "package.json"), "utf-8")) as PackageJSON;
-const devDependencies = Object.keys(packageJSON.devDependencies);
-const dependencies = Object.keys(packageJSON.dependencies);
+const devDependencies = Object.keys(packageJSON.devDependencies ?? {});
+const dependencies = Object.keys(packageJSON.dependencies ?? {});
 
 await exec(`npm install -DE ${devDependencies.join(" ")}`, { cwd: projectDir });
 await exec(`npm install ${dependencies.join(" ")}`, { cwd: projectDir });
