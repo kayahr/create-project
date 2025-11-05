@@ -3,15 +3,15 @@
  * See LICENSE.md for licensing information
  */
 
-import { describe, expect, it } from "vitest";
-
-import * as exports from "../main/index.js";
-import { sum, type SumArgs } from "../main/sum.js";
+import { describe, it } from "node:test";
+import { assertEquals } from "@kayahr/assert";
+import * as exports from "../main/index.ts";
+import { type SumArgs, sum } from "../main/sum.ts";
 
 describe("index", () => {
     it("exports relevant types and functions and nothing more", () => {
         // Check classes and enums
-        expect({ ...exports }).toEqual({
+        assertEquals({ ...exports }, {
             sum
         });
 

@@ -7,7 +7,10 @@
     "keywords": [],
     "license": "MIT",
     "author": "Klaus Reimer <k@ailis.de>",
-    "repository": "github:kayahr/${projectName}",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kayahr/${projectName}.git"
+    },
     "homepage": "https://github.com/kayahr/${projectName}",
     "bugs": "https://github.com/kayahr/${projectName}/issues",
     "funding": "https://github.com/kayahr/${projectName}?sponsor=1",
@@ -20,31 +23,26 @@
     ],
     "exports": "./lib/main/index.js",
     "scripts": {
-        "clean": "rimraf lib",
-        "build": "run-s build:*",
+        "clean": "rm -rf lib",
+        "build": "run build:*",
         "build:compile": "tsc",
-        "test": "run-s test:*",
-        "test:unit": "vitest run",
-        "test:lint": "eslint --max-warnings 0",
-        "test:apidoc": "typedoc --emit none",
+        "test": "run test:*",
+        "test:unit": "ntest",
         "test:spell": "cspell --no-progress --no-summary",
+        "test:lint": "oxlint --type-aware --deny-warnings",
+        "test:apidoc": "typedoc --emit none",
         "apidoc": "typedoc",
-        "install:browser": "playwright install chromium",
-        "prepare": "run-s install:browser clean build"
+        "start": "node lib/main/create-project.js",
+        "prepare": "run clean build"
     },
     "devDependencies": {
-        "@kayahr/eslint-config": "*",
-        "@kayahr/vitest-matchers": "*",
+        "@kayahr/assert": "*",
+        "@kayahr/cspell": "*",
+        "@kayahr/npm-utils": "*",
+        "@kayahr/ntest": "*",
+        "@kayahr/oxlint-config": "*",
+        "@kayahr/typedoc": "*",
         "@types/node": "*",
-        "@vitest/browser": "*",
-        "@vitest/coverage-v8": "*",
-        "cspell": "*",
-        "npm-run-all": "*",
-        "playwright": "*",
-        "rimraf": "*",
-        "source-map-support": "*",
-        "typedoc": "*",
-        "typescript": "*",
-        "vitest": "*"
+        "typescript": "*"
     }
 }

@@ -3,16 +3,16 @@
  * See LICENSE.md for licensing information
  */
 
-import { describe, expect, it } from "vitest";
-
-import { sum } from "../main/sum.js";
+import { describe, it } from "node:test";
+import { assertSame } from "@kayahr/assert";
+import { sum } from "../main/sum.ts";
 
 describe("sum", () => {
     it("sums two numbers", () => {
-        expect(sum(1, 2)).toBe(3);
+        assertSame(sum(1, 2), 3);
     });
     it("sums more numbers", () => {
-        expect(sum(1, 2, 3)).toBe(6);
-        expect(sum(1, 2, 3, 4)).toBe(10);
+        assertSame(sum(1, 2, 3), 6);
+        assertSame(sum(1, 2, 3, 4), 10);
     });
 });

@@ -2,9 +2,9 @@
     "$schema": "http://json.schemastore.org/tsconfig",
     "compileOnSave": true,
     "compilerOptions": {
+        "allowImportingTsExtensions": true,
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
-        "importHelpers": true,
         "lib": [
             "ES2022"
         ],
@@ -20,6 +20,7 @@
         "noUnusedParameters": false,
         "outDir": "lib",
         "preserveSymlinks": true,
+        "rewriteRelativeImportExtensions": true,
         "rootDir": "src",
         "skipLibCheck": true,
         "sourceMap": true,

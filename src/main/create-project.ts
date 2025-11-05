@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
-import { spawn, type SpawnOptions } from "node:child_process";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { type SpawnOptions, spawn } from "node:child_process";
+import { glob, mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 
-import { glob } from "glob";
-
-import type { PackageJSON } from "./PackageJSON.js";
+import type { PackageJSON } from "./PackageJSON.ts";
 
 async function exec(command: string, options: SpawnOptions = {}): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -34,14 +32,16 @@ const templateVars: Record<string, string> = {
     year: String(new Date().getFullYear())
 };
 
-await mkdir(projectName, { recursive: true });
-for (const filename of await glob("**/*.tmpl", { cwd: templateDir, nodir: true, dot: true })) {
+for await (const filename of glob([ "**/*.tmpl", ".*/**/*.tmpl", ".*.tmpl" ], { cwd: templateDir })) {
     const source = await readFile(join(templateDir, filename), "utf-8");
     const replaced = source.replace(varRegExp, (substring, varName: string) => templateVars[varName]);
     const target = join(projectDir, filename.replace(/\.tmpl$/, ""));
     await mkdir(dirname(target), { recursive: true });
     await writeFile(target, replaced, "utf-8");
 }
+
+// Create empty .git directory because oxlint ignores .gitignore when .git is missing
+await mkdir(join(projectDir, ".git"), { recursive: true });
 
 const packageJSON = JSON.parse(await readFile(join(projectDir, "package.json"), "utf-8")) as PackageJSON;
 const devDependencies = Object.keys(packageJSON.devDependencies ?? {});
