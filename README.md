@@ -2,7 +2,7 @@
 
 To create a new @kayahr project run this:
 
-    npm init @kayahr/project <project-directory>
+    npm init @kayahr/project@latest <project-directory>
 
 This performs the following steps:
 
