@@ -1,7 +1,7 @@
 {
     "$schema": "https://json.schemastore.org/package",
     "name": "@kayahr/create-project",
-    "version": "2.1.2",
+    "version": "2.2.0",
     "type": "module",
     "description": "Template for kayahr typescript projects",
     "keywords": [
